@@ -137,3 +137,13 @@ int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 	}
 	return a;
 }
+
+int AI::X(int pos){
+
+	return pos % 3;
+}
+
+int AI::Y(int pos) {
+
+	return pos / 3;
+}

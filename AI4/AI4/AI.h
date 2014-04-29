@@ -11,5 +11,7 @@ private:
 	int testGame();
 	int negamax(int who, int &move);
 	int AlphaBetaNegamax(int who, int &move, int a, int b);
+	int X(int pos);
+	int Y(int pos);
 };
 

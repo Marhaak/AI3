@@ -16,8 +16,9 @@
 * along with SuperTicTacToe. If not, see <http://www.gnu.org/licenses/>.
 */
  
-#include <stdio.h>
+#include <stdio.h> 
 #include <stdlib.h>
+
  
 bool done, clearFlag;
 int board[3][3];
@@ -299,6 +300,7 @@ void printOutro()
   printf("Game Winner: %d\n", winner);
 }
  
+/*
 int main()
 {
   printIntro();
@@ -316,3 +318,4 @@ int main()
   printOutro();
   return 0;
 }
+*/

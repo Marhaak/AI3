@@ -36,10 +36,10 @@ int AI::testGame()
   }
  
   if (map->Return(0, 0) == map->Return(1, 1) && map->Return(2, 2) == map->Return(1, 1) && map->Return(0, 0) != -1)
-    return map->Return()[0][0];
+    return map->Return(0, 0);
  
   if (map->Return(0, 2) == map->Return(1, 1) && map->Return(2, 0) == map->Return(1, 1) && map->Return(1, 1) != -1)
-    return map->Return()[1][1];
+    return map->Return(1, 1);
  
   for (i = 0; i < 3; i++)
     for (j = 0; j < 3; j++)

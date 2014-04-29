@@ -42,9 +42,28 @@ void Map::Draw(){
 
 
 
-int Map::Return(int _x, int _y){
+int Map::Get(int _x, int _y){
 
 	if( _x < 0 || _x > gameboard.size() || _y < 0 || _y > gameboard[0].size() ){ return -2; }
 	else{ return gameboard[_x][_y]; }
 
+}
+
+
+int Map::Set(int _xy, int who){
+
+	if( Get(_xy, _xy) != -2){
+		gameboard[_xy][_xy] = who;
+	}
+	return 1;
+}
+
+
+
+int Map::Set(int _x, int _y, int who){
+
+	if( Get(_x, _y) != -2){
+		gameboard[_x][_y] = who;
+	}
+	return 1;
 }

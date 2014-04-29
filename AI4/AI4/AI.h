@@ -5,8 +5,9 @@ class AI {
 public:
 	AI(Map *_map);
 	~AI(void);
-	int testGame();
+	void play();
 private:
 	Map *map;
+	int testGame();
 };
 

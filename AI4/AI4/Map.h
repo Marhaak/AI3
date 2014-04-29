@@ -15,6 +15,7 @@ public:
 	~Map(void);
 
 	void Draw();
+	int Return(int _x, int _y);
 	
 
 };

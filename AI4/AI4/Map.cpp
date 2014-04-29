@@ -39,3 +39,12 @@ void Map::Draw(){
 		std::cout << std::endl;
 	}
 }
+
+
+
+int Map::Return(int _x, int _y){
+
+	if( _x < 0 || _x > gameboard.size() || _y < 0 || _y > gameboard[0].size() ){ return -2; }
+	else{ return gameboard[_x][_y]; }
+
+}

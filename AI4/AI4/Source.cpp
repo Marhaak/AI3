@@ -175,7 +175,7 @@ int testGame()
     int fl = board[0][i];
     for (j = 1; j < 3; j++)
       if (board[j][i] != fl)
-	fl = -1;
+	  fl = -1;
     if (fl == -1)
       continue;
     return fl;

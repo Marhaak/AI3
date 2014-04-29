@@ -9,5 +9,7 @@ public:
 private:
 	Map *map;
 	int testGame();
+	int negamax(int who, int &move);
+	int AlphaBetaNegamax(int who, int &move, int a, int b);
 };
 

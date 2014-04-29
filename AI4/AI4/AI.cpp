@@ -84,7 +84,7 @@ int AI::negamax(int who, int &move) {
 				bestScore = score;
 				move = i;
 			}
-		map->Unset(i);
+		map->Set(i, -1);
 		}
 	}
   return bestScore;
@@ -110,7 +110,7 @@ int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 			map->Set(i, who);
 			int tmp;
 			int score = -AlphaBetaNegamax(1 - who, tmp, -b, -a);
-			map->Unset(i);
+			map->Set(i, -1);
 			if (score >= b)
 			{
 				move = i;

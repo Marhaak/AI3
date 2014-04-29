@@ -15,7 +15,9 @@ public:
 	~Map(void);
 
 	void Draw();
-	int Return(int _x, int _y);
+	int Get(int _x, int _y);
+	int Set(int _xy, int who);
+	int Set(int _x, int _y, int who);
 	
 
 };

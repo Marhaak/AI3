@@ -65,7 +65,7 @@ void AI::play() {
 	int bx = 0;
 //  ABnegamax(player, bx, -1, 1);
 	negamax(player, bx);
-	Set(bx, player);
+	map->Set(bx, player);
 	printf("Played in: %d %d\n", X(bx), Y(bx));
 }
 

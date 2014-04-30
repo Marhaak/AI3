@@ -17,11 +17,13 @@ int numPlayers = 2;
 
 int main(){
 
-	Map map = Map();
-	AI* ai = new AI(&map, 1);
-
-
+	Map map = Map(3,3);
+	AI ai = AI(&map, 2);
 	map.Draw();
+	
+	ai.play();
+
+	
 
 	std::cin.get();
 	return 0;

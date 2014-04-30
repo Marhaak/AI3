@@ -21,7 +21,10 @@ int main(){
 	Map map = Map();
 	AI* ai = new AI(&map, 1);
 	printIntro();
+
 	map.Draw();
+	
+	//ai->play();
 
 	std::cin.get();
 

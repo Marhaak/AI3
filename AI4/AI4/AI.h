@@ -20,4 +20,3 @@ private:
 	int Y(int pos);
 	
 };
-

@@ -44,7 +44,7 @@ void unset(int pos)
   board[Y(pos)][X(pos)] = -1;
 }
  
-void printIntro()
+/*void printIntro()
 {
   printf(" _____ _           _____               _____          \n");
   printf("|_   _(_)         |_   _|             |_   _|         \n");
@@ -54,7 +54,7 @@ void printIntro()
   printf("  \\_/ |_|\\___|      \\_/\\__,_|\\___|      \\_/\\___/ \\___|\n");
   printf("                                                      \n");
   printf("                                                      \n\n\t\tPedro Paredes (DCC/FCUP)\n\n");
-}
+}*/
  
 void setup()
 {
@@ -194,7 +194,6 @@ int testGame()
   return -1;
 }
  
- 
 void opPlay()
 {
   printBoard();
@@ -296,7 +295,7 @@ void play()
 void printOutro()
 {
   clear();
-  printIntro();
+ // printIntro();
   printf("Game Winner: %d\n", winner);
 }
  

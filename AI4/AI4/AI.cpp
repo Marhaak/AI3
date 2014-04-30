@@ -6,6 +6,7 @@ AI::AI(int _x, int _y, int _player) {
 	playerNumber = _player;
 
 	map->Draw();
+
 }
 
 

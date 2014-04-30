@@ -1,10 +1,14 @@
-#include "AI.h"
+#include "Include.h"
 
 
-AI::AI(Map *_map, int _player) {
-	map = _map;
-	playerNumber = _player;
 	
+
+AI::AI(int _x, int _y, int _player) {
+	map = new Map(_x, _y);
+	playerNumber = _player;
+
+	map->Draw();
+
 }
 
 
@@ -13,10 +17,10 @@ AI::~AI(void) {
 
 int AI::testGame(){
   
-	int i, j, fl;
+	int i, j;
 
 	for (i = 0; i < 3; i++) {
-		fl = map->Get(i, 0);
+		int fl = map->Get(i, 0);
 		for (j = 1; j < 3; j++) {
 			if (map->Get(i, j) != fl) {
 				fl = -1;
@@ -29,7 +33,7 @@ int AI::testGame(){
 	}
  
 	for (i = 0; i < 3; i++) {
-		fl = map->Get(0, i);
+		int fl = map->Get(0, i);
 		for (j = 1; j < 3; j++) {
 			if (map->Get(j, i) != fl) {
 				fl = -1;
@@ -70,7 +74,7 @@ int AI::testGame(){
 void AI::play() {
 
 	int bx = 0;
-//  ABnegamax(playerNumber, bx, -1, 1);
+    //AlphaBetaNegamax(playerNumber, bx, -1, 1);
 	negamax(playerNumber, bx);
 	map->Set(bx, playerNumber);
 	printf("Played in: %d %d\n", X(bx), Y(bx));
@@ -78,7 +82,8 @@ void AI::play() {
 
 int AI::negamax(int who, int &move) {
 	
-	int D = testGame(), bestScore, i;
+	int D = testGame();
+
 	if (D != 2) {
 
 		if (D == -1) {
@@ -91,7 +96,7 @@ int AI::negamax(int who, int &move) {
 		}
 	}
 
-	bestScore = -1;
+	int bestScore = -1, i;
 
 	for (i = 0; i < 9; i++) {
 		if (map->Get(Y(i), X(i)) == -1) {
@@ -107,7 +112,7 @@ int AI::negamax(int who, int &move) {
 		map->Set(i, -1);
 		}
 	}
-  return bestScore;
+	return bestScore;
 }
 
 int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {

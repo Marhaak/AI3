@@ -1,13 +1,9 @@
 #pragma once
 #include "Include.h"
 
-
-
 class Map {
 private:
 	std::vector< std::vector<int> > gameboard;
-
-
 
 public:
 	
@@ -20,4 +16,3 @@ public:
 	int Set(int _x, int _y, int who);	
 
 };
-

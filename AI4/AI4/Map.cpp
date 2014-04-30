@@ -22,11 +22,11 @@ void Map::Draw() {
 	for(unsigned x = 0; x < gameboard.size(); x++) {
 		for(unsigned y = 0; y < gameboard[0].size(); y++) {
 
-			if(gameboard[x][y] == -1) { 
-				std::cout << x; 
-			} else { 
+			/*if(gameboard[x][y] == -1) { 
+				std::cout << -1; 
+			} else {*/ 
 				std::cout << gameboard[x][y]; 
-			}
+			//}
 		}
 		std::cout << std::endl;
 	}

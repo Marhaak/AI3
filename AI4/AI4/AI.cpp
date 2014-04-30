@@ -7,18 +7,17 @@ AI::AI(Map *_map, int _player) {
 }
 
 
-AI::~AI(void)
-{
+AI::~AI(void) {
 }
 
 int AI::testGame(){
   
-	int i, j;
+	int i, j, fl;
 
-	for (i = 0; i < 3; i++){
-		int fl = map->Get(i, 0);
-		for (j = 1; j < 3; j++){
-			if (map->Get(i, j) != fl){
+	for (i = 0; i < 3; i++) {
+		fl = map->Get(i, 0);
+		for (j = 1; j < 3; j++) {
+			if (map->Get(i, j) != fl) {
 				fl = -1;
 			}
 		}
@@ -28,14 +27,15 @@ int AI::testGame(){
 		return fl;
 	}
  
-	for (i = 0; i < 3; i++){
-		int fl = map->Get(0, i);
-		for (j = 1; j < 3; j++){
-			if (map->Get(j, i) != fl){
+	for (i = 0; i < 3; i++) {
+		fl = map->Get(0, i);
+		for (j = 1; j < 3; j++) {
+			if (map->Get(j, i) != fl) {
 				fl = -1;
 			}
 		}
-		if (fl == -1){
+
+		if (fl == -1) {
 			continue;
 		}
 		return fl;
@@ -43,21 +43,26 @@ int AI::testGame(){
  
 
 	//Check the diagonal lines
-	if (map->Get(0, 0) == map->Get(1, 1) && map->Get(2, 2) == map->Get(1, 1) && map->Get(0, 0) != -1)
+	if (map->Get(0, 0) == map->Get(1, 1) && 
+		map->Get(2, 2) == map->Get(1, 1) && 
+		map->Get(0, 0) != -1) {
 		return map->Get(0, 0);
- 
-	if (map->Get(0, 2) == map->Get(1, 1) && map->Get(2, 0) == map->Get(1, 1) && map->Get(1, 1) != -1)
+	}
+
+	if (map->Get(0, 2) == map->Get(1, 1) && 
+		map->Get(2, 0) == map->Get(1, 1) && 
+		map->Get(1, 1) != -1) {
 		return map->Get(1, 1);
- 
+	}
 
-
-	for (i = 0; i < 3; i++){
-		for (j = 0; j < 3; j++){
-			if (map->Get(i, j) == -1){
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 3; j++) {
+			if (map->Get(i, j) == -1) {
 				return 2;
 			}
 		}
 	}
+
 	return -1;
 }
 
@@ -72,7 +77,7 @@ void AI::play() {
 
 int AI::negamax(int who, int &move) {
 
-	int D = testGame();
+	int D = testGame(), bestScore, i;
 	if (D != 2) {
 
 		if (D == -1) {
@@ -81,11 +86,12 @@ int AI::negamax(int who, int &move) {
 		if (D == who) {
 		  return 1;
 		} else {
-
 		  return -1;
 		}
 	}
-	int bestScore = -1, i;
+
+	bestScore = -1;
+
 	for (i = 0; i < 9; i++) {
 		if (map->Get(Y(i), X(i)) == -1) {
 
@@ -105,7 +111,7 @@ int AI::negamax(int who, int &move) {
 
 int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 
-	int D = testGame();
+	int D = testGame(), i, flag;
 	if (D != 2) {
 		if (D == -1){
 		  return 0;
@@ -117,18 +123,19 @@ int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 		  return -1;
 		}
 	}
-	int i, flag = 0;
+	flag = 0;
 	for (i = 0; i < 9; i++) {
 		if (map->Get(Y(i), X(i)) == -1) {
 			map->Set(i, who);
 			int tmp;
 			int score = -AlphaBetaNegamax(1 - who, tmp, -b, -a);
 			map->Set(i, -1);
-			if (score >= b)
-			{
+			
+			if (score >= b) {
 				move = i;
 				return score;
 			}
+
 			if (score > a || (score == a && flag == 0)) {
 				move = i;
 				a = score;
@@ -139,12 +146,10 @@ int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 	return a;
 }
 
-int AI::X(int pos){
-
+int AI::X(int pos) {
 	return pos % 3;
 }
 
 int AI::Y(int pos) {
-
 	return pos / 3;
 }

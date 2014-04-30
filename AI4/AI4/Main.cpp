@@ -13,18 +13,17 @@ void printIntro()
   printf("  | | | | (__       | | (_| | (__       | | (_) |  __/\n");
   printf("  \\_/ |_|\\___|      \\_/\\__,_|\\___|      \\_/\\___/ \\___|\n");
   printf("                                                      \n");
-  printf("                                                      \n\n\t\tPedro Paredes (DCC/FCUP)\n\n");
 }
+
 
 int main(){
 
-	Map map = Map();
-	AI* ai = new AI(&map, 1);
 	printIntro();
 
-	map.Draw();
+	AI* ai = new AI(sizeX, sizeY, numPlayers);
 	
-	//ai->play();
+	ai->play();
+
 
 	std::cin.get();
 

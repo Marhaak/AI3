@@ -6,7 +6,7 @@ Map::Map(int _x, int _y) {
 	for (int x = 0; x < _x; x++){
 		std::vector<int> temp;
 		for(int y = 0; y < _y; y++){
-			temp.push_back(-1);
+			temp.push_back(0);
 		}
 		gameboard.push_back(temp);
 	}

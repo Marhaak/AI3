@@ -17,8 +17,7 @@ public:
 	void Draw();
 	int Get(int _x, int _y);
 	int Set(int _xy, int who);
-	int Set(int _x, int _y, int who);
-	
+	int Set(int _x, int _y, int who);	
 
 };
 

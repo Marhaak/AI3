@@ -6,15 +6,9 @@ int numPlayers = 2;
 
 int main(){
 
-
-	Map map = Map(3,3);
-	AI ai = AI(&map, 2);
-
-	map.Draw();
+	AI ai = AI(sizeX, sizeY, numPlayers);
 	
 	ai.play();
-
-	
 
 	std::cin.get();
 

@@ -3,16 +3,16 @@
 
 class AI {
 public:
-	AI(Map *_map, int _player);
+	AI(int _x = 3, int _y = 3, int _player = 2);
 	~AI(void);
 	void play();
 private:
+
 	/* Variables */
 	int playerNumber;
+	Map* map;
 
 	/* Functions */
-
-	Map *map;
 	int testGame();
 	int negamax(int who, int &move);
 	int AlphaBetaNegamax(int who, int &move, int a, int b);

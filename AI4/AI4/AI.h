@@ -11,7 +11,7 @@ private:
 	int playerNumber;
 
 	/* Functions */
-
+	
 	Map *map;
 	int testGame();
 	int negamax(int who, int &move);

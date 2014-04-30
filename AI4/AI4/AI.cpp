@@ -2,8 +2,9 @@
 
 
 AI::AI(Map *_map, int _player) {
-	_map = map;
-	_player = playerNumber;
+	map = _map;
+	playerNumber = _player;
+	
 }
 
 
@@ -76,7 +77,7 @@ void AI::play() {
 }
 
 int AI::negamax(int who, int &move) {
-
+	
 	int D = testGame(), bestScore, i;
 	if (D != 2) {
 

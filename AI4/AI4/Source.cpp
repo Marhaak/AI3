@@ -15,7 +15,7 @@
 * You should have received a copy of the GNU General Public License
 * along with SuperTicTacToe. If not, see <http://www.gnu.org/licenses/>.
 */
- 
+ /*
 #include <stdio.h> 
 #include <stdlib.h>
 
@@ -23,7 +23,7 @@
 bool done, clearFlag;
 int board[3][3];
 int player, winner;
- 
+
 int X(int pos)
 {
   return pos % 3;
@@ -33,7 +33,7 @@ int Y(int pos)
 {
   return pos / 3;
 }
- 
+
 void set(int pos, int who)
 {
   board[Y(pos)][X(pos)] = who;
@@ -43,9 +43,8 @@ void unset(int pos)
 {
   board[Y(pos)][X(pos)] = -1;
 }
- 
-/*void printIntro()
-{
+
+void printIntro() {
   printf(" _____ _           _____               _____          \n");
   printf("|_   _(_)         |_   _|             |_   _|         \n");
   printf("  | |  _  ___ ______| | __ _  ___ ______| | ___   ___ \n");
@@ -54,8 +53,8 @@ void unset(int pos)
   printf("  \\_/ |_|\\___|      \\_/\\__,_|\\___|      \\_/\\___/ \\___|\n");
   printf("                                                      \n");
   printf("                                                      \n\n\t\tPedro Paredes (DCC/FCUP)\n\n");
-}*/
- 
+}
+
 void setup()
 {
   printf("Input starting player: ");
@@ -79,7 +78,6 @@ void setup()
 }
  
 void clear()
-{
   if (!clearFlag)
     return;
   system ("clear");
@@ -298,8 +296,7 @@ void printOutro()
  // printIntro();
   printf("Game Winner: %d\n", winner);
 }
- 
-/*
+
 int main()
 {
   printIntro();

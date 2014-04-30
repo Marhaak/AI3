@@ -77,6 +77,7 @@ void AI::play() {
 int AI::negamax(int who, int &move) {
 
 	int D = testGame(), bestScore, i;
+
 	if (D != 2) {
 
 		if (D == -1) {

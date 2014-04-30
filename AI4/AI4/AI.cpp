@@ -1,6 +1,5 @@
 #include "AI.h"
 
-
 AI::AI(Map *_map, int _player) {
 	_map = map;
 	_player = playerNumber;

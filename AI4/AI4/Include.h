@@ -16,4 +16,5 @@ extern int numPlayers;
 
 // Project Headers
 #include "Map.h"
+#include "AI.h"
 

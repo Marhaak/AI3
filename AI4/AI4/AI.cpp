@@ -1,8 +1,9 @@
 #include "AI.h"
 
 
-AI::AI(Map *_map) {
+AI::AI(Map *_map, int _player) {
 	_map = map;
+	_player = playerNumber;
 }
 
 
@@ -63,9 +64,9 @@ int AI::testGame(){
 void AI::play() {
 
 	int bx = 0;
-//  ABnegamax(player, bx, -1, 1);
-	negamax(player, bx);
-	map->Set(bx, player);
+//  ABnegamax(playerNumber, bx, -1, 1);
+	negamax(playerNumber, bx);
+	map->Set(bx, playerNumber);
 	printf("Played in: %d %d\n", X(bx), Y(bx));
 }
 

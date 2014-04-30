@@ -18,6 +18,7 @@ int numPlayers = 2;
 int main(){
 
 	Map map = Map();
+	AI* ai = new AI(&map, 1);
 
 
 	map.Draw();

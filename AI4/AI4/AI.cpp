@@ -4,10 +4,17 @@
 	
 
 AI::AI(int _x, int _y, int _player) {
-	map = new Map(_x, _y);
+	//map = new Map(_x, _y);
 	playerNumber = _player;
+	test = 0;
+	//map->Draw();
+	for(int x = 0; x < 3; x++) {
+		for (int y=0; y<3; y++) {
 
-	map->Draw();
+			map[x][y] = -1;
+		}
+
+	}
 
 }
 
@@ -20,9 +27,9 @@ int AI::testGame(){
 	int i, j;
 
 	for (i = 0; i < 3; i++) {
-		int fl = map->Get(i, 0);
+		int fl = map[i][0];
 		for (j = 1; j < 3; j++) {
-			if (map->Get(i, j) != fl) {
+			if (map[i][j] != fl) {
 				fl = -1;
 			}
 		}
@@ -33,9 +40,9 @@ int AI::testGame(){
 	}
  
 	for (i = 0; i < 3; i++) {
-		int fl = map->Get(0, i);
+		int fl = map[0][i];
 		for (j = 1; j < 3; j++) {
-			if (map->Get(j, i) != fl) {
+			if (map[j][i] != fl) {
 				fl = -1;
 			}
 		}
@@ -48,21 +55,21 @@ int AI::testGame(){
  
 
 	//Check the diagonal lines
-	if (map->Get(0, 0) == map->Get(1, 1) && 
-		map->Get(2, 2) == map->Get(1, 1) && 
-		map->Get(0, 0) != -1) {
-		return map->Get(0, 0);
+	if (map[0][0] == map[1][1] && 
+		map[2][2] == map[1][1] && 
+		map[0][0] != -1) {
+		return map[0][0];
 	}
 
-	if (map->Get(0, 2) == map->Get(1, 1) && 
-		map->Get(2, 0) == map->Get(1, 1) && 
-		map->Get(1, 1) != -1) {
-		return map->Get(1, 1);
+	if (map[0][2] == map[1][1] && 
+		map[2][0] == map[1][1] && 
+		map[1][1] != -1) {
+		return map[1][1];
 	}
 
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 3; j++) {
-			if (map->Get(i, j) == -1) {
+			if (map[i][j] == -1) {
 				return 2;
 			}
 		}
@@ -76,12 +83,12 @@ void AI::play() {
 	int bx = 0;
     //AlphaBetaNegamax(playerNumber, bx, -1, 1);
 	negamax(playerNumber, bx);
-	map->Set(bx, playerNumber);
+	map[bx][bx] = playerNumber;
 	printf("Played in: %d %d\n", X(bx), Y(bx));
 }
 
 int AI::negamax(int who, int &move) {
-	
+	std::cout<< test++<< "\n";
 	int D = testGame();
 
 	if (D != 2) {
@@ -99,9 +106,9 @@ int AI::negamax(int who, int &move) {
 	int bestScore = -1, i;
 
 	for (i = 0; i < 9; i++) {
-		if (map->Get(Y(i), X(i)) == -1) {
+		if (map[Y(i)][X(i)] == -1) {
 
-			map->Set(i, who);
+			map[i][i] = who;
 			int tmp;
 			int score = -negamax(1 - who, tmp);
 			if (score > bestScore) {
@@ -109,14 +116,39 @@ int AI::negamax(int who, int &move) {
 				bestScore = score;
 				move = i;
 			}
-		map->Set(i, -1);
+		map[i][i] = -1;
 		}
 	}
 	return bestScore;
+	//int D = testGame();
+ // if (D != 2)
+ // {
+ //   if (D == -1)
+ //     return 0;
+ //   if (D == who)
+ //     return 1;
+ //   else
+ //     return -1;
+ // }
+ // int bestScore = -1, i;
+ // for (i = 0; i < 9; i++)
+ //   if (map->Get(Y(i), X(i)) == -1)
+ //   {
+ //     map->Set(i, who);
+ //     int tmp;
+ //     int score = -this->negamax(1 - who, tmp);
+ //     if (score > bestScore)
+ //     {
+	//bestScore = score;
+	//move = i;
+ //     }
+ //     map->Set(i,-1);
+ //   }
+ // return bestScore;
 }
 
 int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
-
+	/*std::cout<< test++<< "\n";
 	int D = testGame(), i, flag;
 	if (D != 2) {
 		if (D == -1){
@@ -148,7 +180,7 @@ int AI::AlphaBetaNegamax(int who, int &move, int a, int b) {
 				flag = 1;
 			}
 		}
-	}
+	}*/
 	return a;
 }
 

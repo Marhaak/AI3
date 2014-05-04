@@ -9,8 +9,9 @@ public:
 private:
 
 	/* Variables */
-	int playerNumber;
-	Map* map;
+	int playerNumber, test, depth;
+	//Map* map;
+	int map[3][3];
 
 	/* Functions */
 

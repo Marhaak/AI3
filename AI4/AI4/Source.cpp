@@ -58,7 +58,6 @@ bool InitSDL() {
     }
 
 
-
 	textureSheet[0] = loadImage("blank.png");
 	textureSheet[1] = loadImage("O.png");
 	textureSheet[2] = loadImage("X.png");

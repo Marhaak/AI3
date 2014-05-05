@@ -29,8 +29,8 @@ SDL_Texture* loadImage(char* _file) {
 	SDL_Texture* tex = nullptr;
 	tex = IMG_LoadTexture(renderer, _file);
     if (tex == nullptr) {
-		//cout<<"Failed to load image: "<< _file)<<" "<<  IMG_GetError();
-		//cin.get();
+		std::cout<<"Failed to load image: "<< _file<<" "<<  IMG_GetError()<< " ";
+		std::cin.get();
 	}
 	
     return tex;
@@ -142,11 +142,11 @@ void clear() {
  
 void printBoard() {
 	int i, j;
-	for (i = 0; i < 3; i++)
-	{
+	SDL_RenderClear(renderer);
+	for (i = 0; i < 3; i++) {
 		printf("\t");
-		for (j = 0; j < 3; j++)
-		{
+		for (j = 0; j < 3; j++) {
+
 			if (board[i][j] == -1) {
 				printf(" ");
 				Draw(i * 100, j * 100, board[i][j]+1);

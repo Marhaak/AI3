@@ -378,19 +378,30 @@ int main(int argc, char* argv[]) {
 		printf("Error!");
 		return 0;
 	}
-	printIntro();
-	setup();
-	while (!done) {
+	bool restart = true;
+	while(restart) {
+		printIntro();
+		setup();
+		while (!done) {
 
-		play();
-		player = 1 - player;
-		if (checkGame()) {
+			play();
+			player = 1 - player;
+			if (checkGame()) {
 
-			done = true;
+				done = true;
+			}
+			printBoard();
 		}
-		printBoard();
+		printOutro();
+		char holder;
+		printf("\nDo you want to try again? Y/N ");
+		scanf_s(" %c", &holder, 1);
+		if(toupper(holder) != 'Y') {
+			restart = false;
+		} else {
+
+			printf("\n\n");
+		}
 	}
-	printOutro();
-	
 	return 0;
 }

@@ -57,9 +57,9 @@ bool InitSDL() {
 		return false;
     }
 
-	//textureSheet[0] = loadImage("blank.png");
-	//textureSheet[1] = loadImage("O.png");
-	//textureSheet[2] = loadImage("wall.png");
+	textureSheet[0] = loadImage("blank.png");
+	textureSheet[1] = loadImage("O.png");
+	textureSheet[2] = loadImage("X.png");
 	// Everything went ok
 	return true;
 }
@@ -144,12 +144,23 @@ void printBoard() {
 		printf("\t");
 		for (j = 0; j < 3; j++)
 		{
-			if (board[i][j] == -1)
-			printf(" ");
-			if (board[i][j] == 0)
-			printf("O");
-			if (board[i][j] == 1)
-			printf("X");
+			if (board[i][j] == -1) {
+				printf(" ");
+				Draw(i * 100, j * 100, board[i][j]+1);
+			}
+			
+			if (board[i][j] == 0) {
+
+				printf("O");
+				Draw(i * 100, j * 100, board[i][j]+1);
+			}
+			
+			if (board[i][j] == 1) {
+
+				printf("X");
+				Draw(i * 100, j * 100, board[i][j]+1);
+			}
+			
 			if (j != 2)
 			printf("|");
 		}
@@ -159,7 +170,8 @@ void printBoard() {
 		
 	}
 	printf("\n\n");
-	}
+	SDL_RenderPresent(renderer);
+}
  
 int checkGame() {
 	int i, j;

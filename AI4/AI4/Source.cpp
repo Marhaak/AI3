@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Include.h"
 
- 
+
 bool done, clearFlag;
 int board[3][3];
 int player, winner, test = 0;
@@ -216,7 +216,7 @@ void opPlay() {
 		printf("Box aready taken...\n");
 		std::cin >> x >> y;
 	}
-	getchar();
+	std::cin.get();
 	set(x, y, player);
 	clear();
 	printf("Played in: %d %d\n", x, y);

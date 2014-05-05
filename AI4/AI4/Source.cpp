@@ -22,9 +22,17 @@ int Y(int pos) {
 void set(int pos, int who) {
 	board[Y(pos)][X(pos)] = who;
 }
+
+void set(int posX, int posY, int who) {
+	board[posY][posX] = who;
+}
  
 void unset(int pos) {
 	board[Y(pos)][X(pos)] = -1;
+}
+
+void unset(int posX, int posY) {
+	board[posY][posX] = -1;
 }
 
 void printIntro() {
@@ -35,7 +43,6 @@ void printIntro() {
 	printf("  | | | | (__       | | (_| | (__       | | (_) |  __/\n");
 	printf("  \\_/ |_|\\___|      \\_/\\__,_|\\___|      \\_/\\___/ \\___|\n");
 	printf("                                                      \n");
-	printf("                                                      \n\n\t\tPedro Paredes (DCC/FCUP)\n\n");
 }
 
 void setup() {
@@ -69,7 +76,7 @@ void clear() {
 	if (!clearFlag) {
 		return;
 	}
-	system ("clear");
+	system ("CLS");
 }
  
 void printBoard() {
@@ -201,18 +208,18 @@ int testGame() {
 void opPlay() {
 
 	printBoard();
-	printf("Select a box to play in: ");
-	int bx;
-	scanf_s("%d", &bx);
-	while (board[Y(bx)][X(bx)] != -1) {
+	printf("Select a box to play in (X Y): ");
+	int x; int y;
+	std::cin >> x >> y;
+	while (board[y][x] != -1) {
 
 		printf("Box aready taken...\n");
-		scanf_s("%d", &bx);
+		std::cin >> x >> y;
 	}
 	getchar();
-	set(bx, player);
+	set(x, y, player);
 	clear();
-	printf("Played in: %d %d\n", X(bx), Y(bx));
+	printf("Played in: %d %d\n", x, y);
 }
  
 int negamax(int who, int &move) {

@@ -16,6 +16,7 @@ int winYSize = 300;
 SDL_Texture* textureSheet[2];		// Array with the textures
 SDL_Window*   window;				// The window
 SDL_Renderer* renderer;				// The renderer
+SDL_Event eventHandler;
 
 void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend) {
 	SDL_Rect pos;
@@ -141,6 +142,7 @@ void clear() {
 }
  
 void printBoard() {
+	
 	int i, j;
 	SDL_RenderClear(renderer);
 	for (i = 0; i < 3; i++) {
@@ -279,6 +281,7 @@ int testGame() {
 }
  
 void opPlay() {
+
 
 	printBoard();
 	printf("Select a box to play in (X Y): ");

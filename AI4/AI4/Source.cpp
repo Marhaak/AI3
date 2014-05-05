@@ -57,9 +57,9 @@ bool InitSDL() {
 		return false;
     }
 
-	textureSheet[0] = loadImage("ground.png");
-	textureSheet[1] = loadImage("dirt.png");
-	textureSheet[2] = loadImage("wall.png");
+	//textureSheet[0] = loadImage("ground.png");
+	//textureSheet[1] = loadImage("dirt.png");
+	//textureSheet[2] = loadImage("wall.png");
 	// Everything went ok
 	return true;
 }

@@ -3,13 +3,66 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <iostream>
-#include "Include.h"
+//#include "Include.h"
+#include "SDL.h"
+#include "SDL_image.h"
 
 
 bool done, clearFlag;
 int board[3][3];
 int player, winner, test = 0;
+int winXSize = 300;
+int winYSize = 300;
+SDL_Texture* textureSheet[2];		// Array with the textures
+SDL_Window*   window;				// The window
+SDL_Renderer* renderer;				// The renderer
 
+void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend) {
+	SDL_Rect pos;
+    pos.x = x;
+    pos.y = y;
+	SDL_QueryTexture(tex, NULL, NULL, &pos.w, &pos.h); 
+    SDL_RenderCopy(rend, tex, NULL, &pos);
+}
+
+SDL_Texture* loadImage(char* _file) {
+	SDL_Texture* tex = nullptr;
+	tex = IMG_LoadTexture(renderer, _file);
+    if (tex == nullptr) {
+		//cout<<"Failed to load image: "<< _file)<<" "<<  IMG_GetError();
+		//cin.get();
+	}
+	
+    return tex;
+}
+
+bool InitSDL() {
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1){
+		//cout << SDL_GetError() << endl;
+		return false;
+	}
+
+	// Creating the window
+	window = SDL_CreateWindow("Tick Tack Toe", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, winXSize, winYSize, NULL);
+    if (window == nullptr){
+        //cout << SDL_GetError() << "\n";
+		return false;
+    }
+
+	// Creating the renderer
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (renderer == nullptr){
+        //cout << SDL_GetError() << endl;
+		return false;
+    }
+
+	textureSheet[0] = loadImage("ground.png");
+	textureSheet[1] = loadImage("dirt.png");
+	textureSheet[2] = loadImage("wall.png");
+	// Everything went ok
+	return true;
+}
 
 int X(int pos) {
 	return pos % 3;
@@ -316,8 +369,13 @@ void printOutro() {
 	printf("Game Winner: %d\n", winner);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 
+	if(!InitSDL()) {
+
+		printf("Error!");
+		return 0;
+	}
 	printIntro();
 	setup();
 	while (!done) {

@@ -57,13 +57,20 @@ bool InitSDL() {
 		return false;
     }
 
+
 	textureSheet[0] = loadImage("blank.png");
 	textureSheet[1] = loadImage("O.png");
 	textureSheet[2] = loadImage("X.png");
+
 	// Everything went ok
 	return true;
 }
 
+void Draw(int _x, int _y, int _i) {
+
+	// Draws to back buffer
+	ApplySurface(_x, _y, textureSheet[_i], renderer);
+}
 int X(int pos) {
 	return pos % 3;
 }

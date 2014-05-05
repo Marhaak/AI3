@@ -68,11 +68,37 @@ bool InitSDL() {
 	return true;
 }
 
+
+
+void select(int &X, int &Y) {
+	
+	bool click = false;
+	SDL_Event _event;
+
+	while (click == false){
+		while (SDL_PollEvent(&_event)) {
+		
+			if (_event.type == SDL_MOUSEBUTTONDOWN && _event.button.button == SDL_BUTTON_LEFT){
+				SDL_GetMouseState(&Y, &X);
+				X = X/100;	Y = Y/100;
+				click = true;
+			}
+
+			if (_event.type == SDL_QUIT){
+				exit(0);
+			}
+		}
+	}
+}
+
+
 void Draw(int _x, int _y, int _i) {
 
 	// Draws to back buffer
 	ApplySurface(_x, _y, textureSheet[_i], renderer);
 }
+
+
 int X(int pos) {
 	return pos % 3;
 }
@@ -131,7 +157,7 @@ void setup() {
 		clearFlag = false;
 	}
 	printf("\n\tStart Game...\n\n\n");
-	getchar();
+	
 }
  
 void clear() {
@@ -286,13 +312,13 @@ void opPlay() {
 	printBoard();
 	printf("Select a box to play in (X Y): ");
 	int x; int y;
-	std::cin >> x >> y;
+	
+	select(x, y);
 	while (board[y][x] != -1) {
 
 		printf("Box aready taken...\n");
-		std::cin >> x >> y;
+		select(x, y);
 	}
-	std::cin.get();
 	set(x, y, player);
 	clear();
 	printf("Played in: %d %d\n", x, y);
@@ -411,7 +437,6 @@ int main(int argc, char* argv[]) {
 			done = true;
 		}
 		printBoard();
-		getchar();
 	}
 	printOutro();
 	return 0;

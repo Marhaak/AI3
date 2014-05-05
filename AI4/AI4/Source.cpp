@@ -8,9 +8,9 @@
 #include "SDL_image.h"
 
 
-bool done, clearFlag;
+bool done;
 int board[3][3];
-int player, winner, test = 0;
+int player, winner;
 int winXSize = 300;
 int winYSize = 300;
 SDL_Texture* textureSheet[2];		// Array with the textures
@@ -147,25 +147,11 @@ void setup() {
 		}
 	}
 	done = false;
-	char flag;
-	printf ("Clear game board after each play? ");
-	scanf_s(" %c", &flag);
-	if (flag == 'y') {
-		clearFlag = true;
-	} else {
-		clearFlag = false;
-	}
+	
 	printf("\n\tStart Game...\n\n\n");
 	
 }
- 
-void clear() {
-	if (!clearFlag) {
-		return;
-	}
-	system ("CLS");
-}
- 
+  
 void printBoard() {
 	int i, j;
 	SDL_RenderClear(renderer);
@@ -304,7 +290,7 @@ int testGame() {
 	return -1;
 }
  
-void opPlay() {
+void playerPlay() {
 
 	printBoard();
 	printf("Select a box to play in (X Y): ");
@@ -317,45 +303,11 @@ void opPlay() {
 		select(x, y);
 	}
 	set(x, y, player);
-	clear();
 	printf("Played in: %d %d\n", x, y);
 }
- 
-int negamax(int who, int &move) {
-
-	test++;
-	int D = testGame();
-	if (D != 2) {
-
-		if (D == -1) {
-			return 0;
-		}
-		if (D == who) {
-			return 1;
-		}else {
-			return -1;
-		}
-	}
-	int bestScore = -1, i;
-	for (i = 0; i < 9; i++) {
-		if (board[Y(i)][X(i)] == -1) {
-
-			set(i, who);
-			int tmp;
-			int score = -negamax(1 - who, tmp);
-			if (score > bestScore) {
-
-				bestScore = score;
-				move = i;
-			}
-		unset(i);
-		}
-	}
-	return bestScore;
-}
- 
+  
 int AlphaBetaNegamax(int who, int &move, int a, int b) {
-	test++;
+	
 	int D = testGame();
 	if (D != 2) {
 
@@ -391,11 +343,9 @@ int AlphaBetaNegamax(int who, int &move, int a, int b) {
 	return a;
 }
  
-void myPlay() {
+void aiPlay() {
   int bx = 0;
-  //AlphaBetaNegamax(player, bx, -1, 1);
-  negamax(player, bx);
-  std::cout<< test<< "\n";
+  AlphaBetaNegamax(player, bx, -1, 1);
   set(bx, player);
   printf("Played in: %d %d\n", X(bx), Y(bx));
 }
@@ -403,16 +353,22 @@ void myPlay() {
 void play() {
 	if (player == 1) {
 
-		opPlay();
+		playerPlay();
 	} else {
-		myPlay();
+		aiPlay();
 	}
 }
  
 void printOutro() {
-	clear();
+
 	// printIntro();
-	printf("Game Winner: %d\n", winner);
+	if( winner == 0) {
+		printf("Game Winner: AI");
+	} else {
+
+		printf("Game Winner: Player");
+	}
+	
 }
 
 int main(int argc, char* argv[]) {
@@ -426,7 +382,6 @@ int main(int argc, char* argv[]) {
 	setup();
 	while (!done) {
 
-		clear();
 		play();
 		player = 1 - player;
 		if (checkGame()) {
@@ -436,5 +391,6 @@ int main(int argc, char* argv[]) {
 		printBoard();
 	}
 	printOutro();
+	
 	return 0;
 }

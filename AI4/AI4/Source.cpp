@@ -26,8 +26,8 @@ SDL_Texture* loadImage(char* _file) { // Returns a pointer to the texture.
 	SDL_Texture* tex = nullptr;
 	tex = IMG_LoadTexture(renderer, _file);
     if (tex == nullptr) { // Checks the pointer and print error.
-		std::cout<<"Failed to load image: "<< _file<<" "<<  IMG_GetError()<< " ";
-		std::cin.get();
+		printf("Failed to load image: %s %s\n", _file, IMG_GetError());
+		getchar();
 	}
     return tex;
 }
@@ -53,7 +53,7 @@ bool InitSDL() {
 	// Loads all the pictures.
 	textureSheet[0] = loadImage("blank.png");
 	textureSheet[1] = loadImage("O.png");
-	textureSheet[2] = loadImage("X.png");
+	textureSheet[2] = loadImage("X9.png");
 
 	// Everything went ok
 	return true;
@@ -311,16 +311,17 @@ void aiPlay() { // Ai calculates his move and plays.
  
 void play() {
 
+	// It is the players turn
 	if (player == 1) {
 		playerPlay();
-	} else {
+	} else {    // Its the AI's turn
 		aiPlay();
 	}
 }
  
 void printOutro() {
 	// Prints the winner of the game.
-	if( winner == 0) {
+	if( winner == 2) {
 		printf("Game Winner: AI");
 	} else {
 		printf("Game Winner: Player");

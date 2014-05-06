@@ -12,6 +12,7 @@ int winYSize = 300;
 SDL_Texture* textureSheet[2];		// Array with the textures
 SDL_Window*   window;				// The window
 SDL_Renderer* renderer;				// The renderer
+SDL_Event eventHandler;
 
 void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend) { // Parameters, x and y, define position in the projected window.
 	SDL_Rect pos;
@@ -25,8 +26,8 @@ SDL_Texture* loadImage(char* _file) { // Returns a pointer to the texture.
 	SDL_Texture* tex = nullptr;
 	tex = IMG_LoadTexture(renderer, _file);
     if (tex == nullptr) { // Checks the pointer and print error.
-		std::cout << "Failed to load image: "<< _file << " " <<  IMG_GetError() << " ";
-		std::cin.get();
+		printf("Failed to load image: %s %s\n", _file, IMG_GetError());
+		getchar();
 	}
     return tex;
 }
@@ -138,6 +139,7 @@ void setup() { // Prepares the board and set ups the order of plays for the algo
 }
   
 void printBoard() { // Prints the image related to the value in the array.
+
 	int i, j;
 	SDL_RenderClear(renderer); // Clears the screen before projecting images.
 	for (i = 0; i < 3; i++) {
@@ -254,7 +256,6 @@ void playerPlay() {
 
 	// Print the board
 	printBoard();
-	
 	// Register the spot to play in.
 	int x; int y;
 	do{
@@ -310,16 +311,17 @@ void aiPlay() { // Ai calculates his move and plays.
  
 void play() {
 
+	// It is the players turn
 	if (player == 1) {
 		playerPlay();
-	} else {
+	} else {    // Its the AI's turn
 		aiPlay();
 	}
 }
  
 void printOutro() {
 	// Prints the winner of the game.
-	if( winner == 0) {
+	if( winner == 2) {
 		printf("Game Winner: AI");
 	} else {
 		printf("Game Winner: Player");

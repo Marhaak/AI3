@@ -1,6 +1,8 @@
+// STD
 #include <stdio.h> 
 #include <stdlib.h>
 #include <iostream>
+// SDL
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -40,12 +42,16 @@ bool InitSDL() {
 	// Creating the window
 	window = SDL_CreateWindow("Tick Tack Toe", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, winXSize, winYSize, NULL);
     if (window == nullptr){
+		printf("Something went wrong, with making the window for SDL");
+		getchar();
 		return false;
     }
 
 	// Creating the renderer
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr){
+		printf("Something went wrong, with making the renderer for SDL");
+		getchar();
 		return false;
     }
 

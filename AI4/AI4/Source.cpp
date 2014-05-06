@@ -12,7 +12,6 @@ int winYSize = 300;
 SDL_Texture* textureSheet[2];		// Array with the textures
 SDL_Window*   window;				// The window
 SDL_Renderer* renderer;				// The renderer
-SDL_Event eventHandler;
 
 void ApplySurface(int x, int y, SDL_Texture *tex, SDL_Renderer *rend) { // Parameters, x and y, define position in the projected window.
 	SDL_Rect pos;
@@ -67,12 +66,13 @@ void select(int &X, int &Y) { // Retrieves the clicked position and prepares it 
 	while (click == false){
 		while (SDL_PollEvent(&_event)) {
 		
+			// Get the mouse position on click.
 			if (_event.type == SDL_MOUSEBUTTONDOWN && _event.button.button == SDL_BUTTON_LEFT){
 				SDL_GetMouseState(&Y, &X);
 				X = X/100;	Y = Y/100;
 				click = true;
 			}
-
+			// On closing the window, exit.
 			if (_event.type == SDL_QUIT){
 				exit(0);
 			}
@@ -207,6 +207,8 @@ int checkGame() {
  
 int testGame() {
 	int i, j;
+
+	// Checks if there is 3 in a row Vertically, and returns the winner if it's not empty
 	for (i = 0; i < 3; i++) {
 		int fl = board[i][0];
 		for (j = 1; j < 3; j++) {
@@ -220,6 +222,7 @@ int testGame() {
 	return fl;
 	}
  
+	// Checks if there is 3 in a row Horizontally, and returns the winner if it's not empty
 	for (i = 0; i < 3; i++) {
 
 		int fl = board[0][i];
@@ -234,14 +237,16 @@ int testGame() {
 	return fl;
 	}
  
+	// Returns the winner if there is 3 in a row diagonally
 	if (board[0][0] == board[1][1] && board[2][2] == board[1][1] && board[0][0] != -1) {
 		return board[0][0];
 	}
- 
 	if (board[0][2] == board[1][1] && board[2][0] == board[1][1] && board[1][1] != -1) {
 		return board[1][1];
 	}
- 
+
+	
+	// Returns 2 if there is a free square
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 3; j++) {
 			if (board[i][j] == -1){
@@ -249,6 +254,8 @@ int testGame() {
 			}
 		}
 	}
+
+	// Otherwise returns -1
 	return -1;
 }
  
@@ -271,27 +278,41 @@ void playerPlay() {
 int AlphaBetaNegamax(int who, int &move, int a, int b) {
 	
 	int D = testGame(); // Checks the state of the game.
+	
+	// If the game have ended.
 	if (D != 2) {
+
+		// Returns a score, 0 = draw, 1 = wictory, -1 = lose
 		if (D == -1) {
 			return 0;
-		}
-		if (D == who) {
+		} else if (D == who) {
 			return 1;
 		} else {
 			return -1;
 		}
 	}
+
+	// If the game haven't ended.
 	int i, flag = 0;
+
+	// Iterate trough all the possible moves, if they're possible
 	for (i = 0; i < 9; i++) {
 		if (board[Y(i)][X(i)] == -1) {
+
+			// Tries a move
 			set(i, who);
 			int tmp;
-			int score = -AlphaBetaNegamax(1 - who, tmp, -b, -a);
+			int score = -AlphaBetaNegamax(1 - who, tmp, -b, -a); // Recursive tries next move until a score is returned.
+			
+			// Undo the move
 			unset(i);
+
+			// If the result is victory or better
 			if (score >= b) {
 				move = i;
 				return score;
 			}
+			// Finds the best possible solution that's not a victory.
 			if (score > a || (score == a && flag == 0)) {
 				move = i;
 				a = score;

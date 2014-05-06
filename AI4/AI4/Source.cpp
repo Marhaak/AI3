@@ -396,8 +396,8 @@ int AlphaBetaNegamax(int who, int &move, int a, int b) {
  
 void myPlay() {
   int bx = 0;
-  //AlphaBetaNegamax(player, bx, -1, 1);
-  negamax(player, bx);
+  AlphaBetaNegamax(player, bx, -1, 1);
+  //negamax(player, bx);
   std::cout<< test<< "\n";
   set(bx, player);
   printf("Played in: %d %d\n", X(bx), Y(bx));

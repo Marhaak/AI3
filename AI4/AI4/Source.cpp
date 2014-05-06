@@ -25,7 +25,7 @@ SDL_Texture* loadImage(char* _file) { // Returns a pointer to the texture.
 	SDL_Texture* tex = nullptr;
 	tex = IMG_LoadTexture(renderer, _file);
     if (tex == nullptr) { // Checks the pointer and print error.
-		std::cout<<"Failed to load image: "<< _file<<" "<<  IMG_GetError()<< " ";
+		std::cout << "Failed to load image: "<< _file << " " <<  IMG_GetError() << " ";
 		std::cin.get();
 	}
     return tex;

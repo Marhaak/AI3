@@ -42,7 +42,7 @@ bool InitSDL() {
 	// Creating the window
 	window = SDL_CreateWindow("Tick Tack Toe", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, winXSize, winYSize, NULL);
     if (window == nullptr){
-		printf("Something went wrong, with making the window for SDL");
+		printf("Something went wrong, with making the window for SDL\n");
 		getchar();
 		return false;
     }
@@ -50,7 +50,7 @@ bool InitSDL() {
 	// Creating the renderer
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (renderer == nullptr){
-		printf("Something went wrong, with making the renderer for SDL");
+		printf("Something went wrong, with making the renderer for SDL\n");
 		getchar();
 		return false;
     }

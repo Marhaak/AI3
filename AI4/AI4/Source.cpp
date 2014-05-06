@@ -53,7 +53,7 @@ bool InitSDL() {
 	// Loads all the pictures.
 	textureSheet[0] = loadImage("blank.png");
 	textureSheet[1] = loadImage("O.png");
-	textureSheet[2] = loadImage("X9.png");
+	textureSheet[2] = loadImage("X.png");
 
 	// Everything went ok
 	return true;
